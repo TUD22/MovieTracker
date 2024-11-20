@@ -3,6 +3,7 @@ package com.example.movietracker
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ class MoviesAdapter (private val movieList: List<Movies>): RecyclerView.Adapter<
         val movieTitle: TextView = itemView.findViewById(R.id.title)
         val movieDesc: TextView = itemView.findViewById(R.id.desc)
         val isMovie: ImageView = itemView.findViewById(R.id.isMovie)
+        val isWached : CheckBox = itemView.findViewById(R.id.check)
         val movieComment: TextView = itemView.findViewById(R.id.comment)
         val movieScore: TextView= itemView.findViewById(R.id.score)
     }
@@ -29,6 +31,23 @@ class MoviesAdapter (private val movieList: List<Movies>): RecyclerView.Adapter<
         holder.movieScore.text = thisMovie.score.toString()
         holder.movieDesc.text = thisMovie.desc
         holder.movieComment.text = thisMovie.comment
+
+
+        if(thisMovie.isMovie){
+            holder.isMovie.setImageResource(R.drawable.movie)
+            holder.isWached.text="obejrzane"
+        }else{
+            holder.isMovie.setImageResource(R.drawable.book)
+            holder.isWached.text="przeczytane"
+        }
+
+        if(thisMovie.isWatched){
+            holder.isWached.isChecked=true
+        }else{
+            holder.isWached.isChecked=false
+        }
+
+
 
     }
 
