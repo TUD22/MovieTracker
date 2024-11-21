@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
@@ -28,7 +29,7 @@ class MoviesAdapter (private val movieList: List<Movies>): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: MoviesHolder, position: Int) {
         val thisMovie = movieList[position]
         holder.movieTitle.text = thisMovie.title
-        holder.movieScore.text = thisMovie.score.toString()
+        holder.movieScore.text = ("${thisMovie.score}/10")
         holder.movieDesc.text = thisMovie.desc
         holder.movieComment.text = thisMovie.comment
 
@@ -46,8 +47,6 @@ class MoviesAdapter (private val movieList: List<Movies>): RecyclerView.Adapter<
         }else{
             holder.isWached.isChecked=false
         }
-
-
 
     }
 

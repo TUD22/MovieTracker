@@ -16,42 +16,68 @@
         android:textSize="50dp"/>
     
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tytuł"/>
-        <EditText
-            android:id="@+id/opis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="opis"/>
-        <EditText
-            android:id="@+id/comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="recenzja"/>
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Tytuł"
+                android:layout_marginEnd="50dp"/>
+            <EditText
+                android:id="@+id/opis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Opis"
+                android:layout_marginEnd="50dp"/>
+            <EditText
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Recenzja"/>
+        </LinearLayout>
         <RadioGroup
+            android:id="@+id/radio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <RadioButton
+                android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="film"
-                android:checked="true"/>
+                android:text="Film" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="książka"/>
+                android:text="Książka"/>
         </RadioGroup>
         <CheckBox
             android:id="@+id/check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="obejrzane/przeczytane"/>
+        <SeekBar
+            android:id="@+id/seek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="1"
+            />
+        <TextView
+            android:id="@+id/seekText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/dodaj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dodaj Film/Książkę" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
