@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
-class MoviesAdapter (private val movieList: List<Movies>): RecyclerView.Adapter<MoviesAdapter.MoviesHolder>(){
+class MoviesAdapter (private val movieList: List<Movies>, private val clickListener:(Movies)-> Unit, ): RecyclerView.Adapter<MoviesAdapter.MoviesHolder>(){
     class MoviesHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val movieTitle: TextView = itemView.findViewById(R.id.title)
         val movieDesc: TextView = itemView.findViewById(R.id.desc)
@@ -34,18 +34,23 @@ class MoviesAdapter (private val movieList: List<Movies>): RecyclerView.Adapter<
         holder.movieComment.text = thisMovie.comment
 
 
-        if(thisMovie.isMovie){
-            holder.isMovie.setImageResource(R.drawable.movie)
-            holder.isWached.text="obejrzane"
-        }else{
+        if(!thisMovie.isMovie){
             holder.isMovie.setImageResource(R.drawable.book)
             holder.isWached.text="przeczytane"
+        }else{
+
+            holder.isMovie.setImageResource(R.drawable.movie)
+            holder.isWached.text="obejrzane"
         }
 
         if(thisMovie.isWatched){
             holder.isWached.isChecked=true
         }else{
             holder.isWached.isChecked=false
+        }
+
+        holder.itemView.setOnClickListener {
+            clickListener(thisMovie)
         }
 
     }

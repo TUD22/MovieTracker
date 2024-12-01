@@ -1,6 +1,7 @@
 package com.example.movietracker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
@@ -8,7 +9,9 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -43,7 +46,8 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.movieRecycler)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter =  MoviesAdapter(movies)
+        val adapter =  MoviesAdapter(movies) { movie-> showAlertDialog(movie.title, movie.score, movie.desc)
+        }
         recyclerView.adapter = adapter
 
         val radioButton = findViewById<RadioButton>(R.id.radioButton)
@@ -76,7 +80,12 @@ class MainActivity : AppCompatActivity() {
             val newMovie = Movies(tytul, opis, isWatched, radioValue, recenzja, seek)
             movies.add(newMovie)
             adapter.notifyDataSetChanged()
-
+            try {
+                JsonManager.saveMovieListToJson(this, movies)
+                Toast.makeText(this, "Dane zapisano", Toast.LENGTH_LONG).show()
+            } catch (ex: Exception){
+                Log.e( "save", "Coś poszło nie tak $ex")
+            }
         }
 
 
@@ -95,6 +104,19 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+
+    }
+
+    private fun showAlertDialog(title: String, score: Int, desc: String){
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage("${desc}\n${score}/10")
+            .setPositiveButton("Ok"){dialog, which ->
+                dialog.dismiss()
+            }
+            .create()
+
+        alertDialog.show()
 
     }
 }
